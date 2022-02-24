@@ -28,7 +28,7 @@ struct MyNode
     struct MyNode *right;
     // instead of having it in a separate struct...
     int int_key;
-    const char* str_key;
+    const char *str_key;
 };
 ```
 Appending, balancing, copying should work with both (and other possible).
