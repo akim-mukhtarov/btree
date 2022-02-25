@@ -1,13 +1,15 @@
 ## Motivation
 
-It's about my curiosity, for learning purposes only.
-It's not a rocket-science or something like that.  
-Somehow I don't find it interesting to write yet another
-Btree (and Node?) structs implementation again.  
-I wonder if I can write a set of macros which expand to generic
-algorithms to use with binary tree-like structs, defined by user himself.  
+In C, making generic data structures isn't trivial.
+Yet this is not really a problem as the C apps are
+rather quite concrete and rarely deal with some tricky business logic.
+Nevertheless I thought about writing a set of macros which expand to
+generic algorithms suitable to any user defined struct,
+that look like binary tree.
 
-Say someone could define her/his binary tree struct as follows:
+It's about my curiosity, for learning purposes only.
+
+Say there are 3 ways to define Node struct:
 
 ```C
 struct Btree
@@ -15,20 +17,28 @@ struct Btree
     struct Btree *parent;
     struct Btree *left;
     struct Btree *right;
-    void *value;  // or union, I guess
+    void *value;  // is not suitable for using with primitive types
 };
 ```      
 
-or in another way
 ```C
-struct MyNode
+struct Node
 {
-    struct MyNode *prev;
-    struct MyNode *left;
-    struct MyNode *right;
-    // instead of having it in a separate struct...
-    int int_key;
-    const char *str_key;
+    struct Node *parent;
+    struct Node* left;
+    struct Node* right;
+    Any_t value;  // assume some user defined union
 };
 ```
-Appending, balancing, copying should work with both (and other possible).
+
+or in a very concrete manner
+```C
+struct Node
+{
+    struct MyNode *parent;
+    struct MyNode *left;
+    struct MyNode *right;
+    int value;
+};
+```
+Appending, balancing, copying and finding should work with all (and other possible :).
