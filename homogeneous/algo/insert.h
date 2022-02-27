@@ -4,7 +4,7 @@ A macro that expands to generic algo of appending
 a binary tree to another binary tree
 It is up to user to define binary tree type
 */
-#define btree__append(                                                  \
+#define btree__insert(                                                  \
         T,                                                              \
         tree,                                                           \
         subtree,                                                        \
